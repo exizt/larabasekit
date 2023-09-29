@@ -14,11 +14,12 @@
 
 # bash handling (bash가 아니면 bash로 실행)
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; exit; fi
+SCRIPT_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")") # 스크립트의 경로
+PROJECT_ROOT_PATH=$(realpath "${SCRIPT_PATH}/../..") # Project Root 경로
+PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 
-# 스크립트의 경로
-SCRIPT_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-
-cd "${SCRIPT_PATH}/../web"
+# Laravel Web 경로로 이동.
+cd "${PROJECT_WEB_PATH}"
 
 # 평범하게 소유권만 바꿔주자.
 sudo chgrp -R www-data bootstrap/cache

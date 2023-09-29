@@ -16,6 +16,9 @@
 
 # bash handling (bash가 아니면 bash로 실행)
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; exit; fi
+SCRIPT_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")") # 스크립트의 경로
+PROJECT_ROOT_PATH=$(realpath "${SCRIPT_PATH}/../..") # Project Root 경로
+PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 
 # 파라미터가 없는 경우는 실행하지 않도록 함. (잘못된 실행 방지)
 if [ "$#" -lt 1 ]; then
@@ -23,16 +26,11 @@ if [ "$#" -lt 1 ]; then
 	exit 1
 fi
 
-# 스크립트의 경로 (절대 경로를 가져옴)
-SCRIPT_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-# 스크립트 파일명
-SCRIPT_NAME=${0##*/}
-
-# 현재 경로로 cd
-cd "${SCRIPT_PATH}"
+# Laravel Web 경로로 이동.
+cd "${PROJECT_WEB_PATH}"
 
 # 라라벨 폴더 및 파일 퍼미션 지정
-bash ./laravel-permission.sh
+bash "${SCRIPT_PATH}/apply-permission.sh"
 
 # 컴포저 업데이트 및 라라벨 캐시 갱신
 sudo docker exec -it $1 "${SCRIPT_PATH}/prod-composer-update.sh"
