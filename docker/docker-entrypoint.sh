@@ -32,6 +32,7 @@ else
 fi
 
 # db 서버를 기다리기
+# @todo 이거 없어도 될 거 같은데?
 echo "wait db server"
 dockerize -wait tcp://db:3306 -timeout 20s
 

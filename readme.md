@@ -10,9 +10,9 @@
     - `MySQL`
     - `MariaDB`
 - PHP 익스텐션
-    - extension=openssl : 뭐였는지 기억 안 나지만 필요함
-    - extension=pdo_mysql : DB 연결을 위해 필요
-    - extension=mbstring : 뭐였는지 기억 안 남
+    - `extension=openssl` : 뭐였는지 기억 안 나지만 필요함
+    - `extension=pdo_mysql` : DB 연결을 위해 필요
+    - `extension=mbstring` : 뭐였는지 기억 안 남
 - 필요 패키지
     
 <br><br>
@@ -66,7 +66,7 @@ sudo chgrp -R www-data *
 ```
 
 
-## `SQLSTATE[HY000] [1045] Access denied`
+## SQLSTATE[HY000] [1045] Access denied
 `SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO)`
 
 
@@ -78,7 +78,7 @@ sudo chgrp -R www-data *
   - 프로덕션의 환경에서는 설정을 확인한 뒤, `php artisan config:cache`
 
 
-## `net::ERR_HTTP_RESPONSE_CODE_FAILURE (500 오류)`
+## net::ERR_HTTP_RESPONSE_CODE_FAILURE (500 오류)
 net::ERR_HTTP_RESPONSE_CODE_FAILURE (500 오류)
 
 
