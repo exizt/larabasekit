@@ -12,9 +12,10 @@ cd /app/web
 # 필요한 패키지 및 초반 셋팅
 if [ -f composer.json ]; then
     if [ -d vendor ]; then
-        echo "vendor exists"
+        echo -n "vendor already exists, it does not install packages. >> "
         # vendor 가 있으므로 composer install 을 하지 않고 진행
     else
+        echo -n "vendor not eixsts. composer installs packages. >> "
         if [ -d "/app/web/bootstrap/cache" ]; then
             # 여기에 해당하는 게 있으면 삭제를 먼저 하지 않으면 
             # php artisan package:discover --ansi handling the post-autoload-dump event returned with error code 1
@@ -29,7 +30,7 @@ if [ -f composer.json ]; then
         echo "ServerName localhost" >> /etc/apache2/apache2.conf
     fi
 else
-    echo "composer.json not exists"
+    echo -n "composer.json does not exist. >> "
 fi
 
 # db 서버를 기다리기
@@ -40,7 +41,7 @@ fi
 # php artisan db:seed --class=UserTableSeeder
 
 # 서버 실행
-echo "Apache server is running..."
+echo -n "Apache server is running..."
 # 환경변수 APACHE_RUN_USER 등의 적용.
 source /etc/apache2/envvars
 # Apache 실행
