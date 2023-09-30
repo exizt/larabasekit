@@ -3,23 +3,27 @@ version: "3.9"
 services: 
   web:
     build:
-      context: .
+      context: ./larabasekit/docker
       dockerfile: Dockerfile
     ports:
       - "${APP_PORT_EXTERNAL}:${APP_PORT}"
     volumes:
-      - ./vhost.conf:/etc/apache2/sites-available/000-default.conf
-      - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
-      - ./../../web:/app/web
-      - ./../../scripts:/app/scripts
-      - ./../../larabasekit/scripts:/app/larabasekit/scripts
-      - ./../../logs:/var/log/apache2
+      # larabasekit/docker
+      - ./larabasekit/docker/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./larabasekit/docker/docker-entrypoint.sh:/app/docker-entrypoint.sh
+      # larabasekit
+      - ./larabasekit/scripts:/app/larabasekit/scripts
+      # project root
+      - ./web:/app/web
+      - ./scripts:/app/scripts
+      - ./logs:/var/log/apache2
       # - ./web/composer.json:/app/composer.json
       # - ./web/composer.lock:/app/composer.lock
     entrypoint: /bin/bash /app/docker-entrypoint.sh
     depends_on:
       - db
   db:
+    # mariadb LTS 버전 10.6 (2026-07), 10.11 (2028-02)
     image: mariadb:10.11
     environment: 
       - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
@@ -31,6 +35,6 @@ services:
       - ${DB_PORT_EXTERNAL}:${DB_PORT}
     volumes:
       - maindb:/var/lib/mysql
-      - ./../../scripts:/app/scripts
+      - ./scripts:/app/scripts
 volumes:
   maindb:

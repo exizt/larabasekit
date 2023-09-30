@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # /app 경로가 없으면 이상이 있는 것이므로 그냥 종료.
+# 보통 잘못 실행한 경우임.
 if ! [ -d /app ]; then
 	echo "not found /app"
 	exit 1
@@ -32,14 +33,15 @@ else
 fi
 
 # db 서버를 기다리기
-# @todo 이거 없어도 될 거 같은데?
-echo "wait db server"
-dockerize -wait tcp://db:3306 -timeout 20s
+# echo "wait db server"
+# dockerize -wait tcp://db:3306 -timeout 20s
 
 # php artisan migrate
 # php artisan db:seed --class=UserTableSeeder
 
 # 서버 실행
 echo "Apache server is running..."
+# 환경변수 APACHE_RUN_USER 등의 적용.
 source /etc/apache2/envvars
+# Apache 실행
 exec apache2 -DFOREGROUND
