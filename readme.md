@@ -5,16 +5,50 @@
 
 
 ## 동작 환경
-- `PHP`: 
+- `PHP`: 8.0 이상
 - 데이터베이스
     - `MySQL`
     - `MariaDB`
 - PHP 익스텐션
-    
+    - extension=openssl : 뭐였는지 기억 안 나지만 필요함
+    - extension=pdo_mysql : DB 연결을 위해 필요
+    - extension=mbstring : 뭐였는지 기억 안 남
 - 필요 패키지
     
 <br><br>
 
+# 로컬 환경
+## 프로젝트 생성 또는 내려받기
+### 프로젝트 생성하기
+1. 프로젝트를 위한 폴더를 생성하고 터미널을 실행한다.
+2. git 생성 및 서브 모듈을 추가한다.
+    ```shell
+    git init
+
+    git submodule add -b main git@github.com:exizt/larabasekit.git larabasekit
+    ```
+### 원격 저장소에서 내려받기
+서브모듈을 포함하여 내려받는다.
+```shell
+git clone --recurse-submodules -j8 (저장소경로) (폴더명)
+```
+
+## 프로젝트 셋팅하기
+1. 라라벨 설정
+    - `web/.env.local.example`을 복사해서 `web/.env` 생성 후 설정.
+2. 도커 설정
+    - `larabasekit/docker/.env.local.example`을 복사해서 프로젝트 루트에 `.env.local`로 생성 후 설정.
+3. 도커 컨테이너 생성 및 실행
+    ```shell
+    sudo docker-compose --env-file=.env.local up --build --force-recreate -d
+    ```
+
+# 팁
+## 도커
+DB 볼륨을 삭제할 필요가 있을 시에는 다음 명령어를 실행한다.
+```shell
+sudo docker-compose --env-file=.env.local down -v
+```
 
 # 문제 해결
 ## `storage`에서 소유권, 퍼미션 문제 발생시
