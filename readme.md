@@ -40,7 +40,7 @@ git clone --recurse-submodules -j8 (저장소경로) (폴더명)
     - `larabasekit/docker/.env.local.example`을 복사해서 프로젝트 루트에 `.env.local`로 생성 후 설정.
 3. 도커 컨테이너 생성 및 실행
     ```shell
-    sudo docker-compose --env-file=.env.local up --build --force-recreate -d
+    sudo docker-compose --env-file=.env.local --project-directory=. up --build --force-recreate -d
     ```
 
 # 팁
