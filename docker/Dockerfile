@@ -1,5 +1,5 @@
 # 'Laravel'을 위한 `PHP, Apache(httpd)` 도커 파일
-FROM php:8.0-apache-bullseye
+FROM php:8.1-apache-bullseye
 
 WORKDIR /app
 
@@ -80,7 +80,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 ## 5. 그 외
 
 # entrypoint.sh 복사
-COPY docker-entrypoint.sh .
+# COPY docker-entrypoint.sh .
 
 # WORKDIR 지정
 WORKDIR /app/web
