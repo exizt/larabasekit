@@ -66,6 +66,11 @@ EXPOSE 80
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+# 업로드 제한을 늘림
+RUN sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 10M/g" "$PHP_INI_DIR/php.ini"
+# 필요시 POST 제한도 늘림
+RUN sed -i "s/post_max_size = 8M/post_max_size = 10M/g" "$PHP_INI_DIR/php.ini"
+
 
 ## 5. 그 외
 
