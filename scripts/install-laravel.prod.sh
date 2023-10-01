@@ -1,14 +1,13 @@
 #!/bin/bash
 # ----------------------------------------------------------------------
-# [ prod-install.sh ]
+# 라라벨 설치 및 셋팅하는 스크립트 (프로덕션 환경)
 #
-# (프로덕션 환경에서) 최초 1회 실행하는 스크립트
-#
-# Copyright 2022 shoon
+# Copyright 2022-2023 shoon
 #
 # 라라벨 폴더 및 파일 퍼미션 지정하고, composer 생성하고, 라라벨 캐시를
 # 생성한다.
 #
+# 스크립트명 : prod-install.sh
 # 파라미터:
 #   - 첫번째 파라미터 : 도커 컨테이너 ID. PHP가 실행 중인 도커 컨테이너 ID를 
 #         넘겨받는다. composer 등을 이용하는데에 필요하다.
@@ -30,11 +29,16 @@ fi
 cd "${PROJECT_WEB_PATH}"
 
 # 라라벨 폴더 및 파일 퍼미션 지정
-bash "${SCRIPT_PATH}/apply-permission.sh"
+# bash "${SCRIPT_PATH}/apply-permission.sh"
+# 쓰기 권한이 필요한 폴더의 그룹 소유권을 www-data로 변경.
+sudo chgrp -R www-data bootstrap/cache
+sudo chgrp -R www-data storage
 
 # 컴포저 업데이트 및 라라벨 캐시 갱신
-sudo docker exec -it $1 "${SCRIPT_PATH}/prod-composer-update.sh"
+# sudo docker exec -it $1 "${SCRIPT_PATH}/prod-composer-update.sh"
 # bash ./prod-composer-update.sh
+sudo docker exec -it $1 bash -c "cd ${PROJECT_WEB_PATH} && php artisan config:cache && php artisan route:cache"
 
 # 스토리지 심볼릭 링크 생성
-# sudo docker exec -it $1 bash -c "cd ${SCRIPT_PATH}/../web && php artisan storage:link"
+# 생성되는 심볼릭 링크에 대한 설정은 '/web/config/filesystems.php'의 가장 하단에 있음.
+sudo docker exec -it $1 bash -c "cd ${PROJECT_WEB_PATH} && php artisan storage:link"

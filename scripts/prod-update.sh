@@ -26,21 +26,22 @@ if [ "$#" -lt 1 ]; then
 	exit 1
 fi
 
-# Laravel Web 경로로 이동.
-cd "${PROJECT_WEB_PATH}"
-
-# git pull 명령어
-# git pull || exit 1
-git pull --recurse-submodules || exit 1
+# 프로젝트 루트로 이동
+cd $PROJECT_ROOT_PATH
 
 # 라라벨 폴더 및 파일 퍼미션 지정
-bash "${SCRIPT_PATH}/apply-permission.sh"
-
-# 스크립트 파일 퍼미션 조정 (퍼미션이 초기화되므로 다시 조정)
-# prod-install.sh 은 권한주지 않아도 되므로 권한을 제외
-cd "${SCRIPT_PATH}"
-chmod 774 ./*.sh
-chmod 664 ./prod-install.sh
+# bash "${SCRIPT_PATH}/apply-permission.sh"
+# 쓰기 권한이 필요한 폴더의 그룹 소유권을 www-data로 변경.
+cd "${PROJECT_WEB_PATH}" # Laravel Web 경로로 이동.
+sudo chgrp -R www-data bootstrap/cache
+sudo chgrp -R www-data storage
 
 # 컴포저 업데이트 및 라라벨 캐시 갱신
-sudo docker exec -it $1 "${SCRIPT_PATH}/prod-composer-update.sh"
+# sudo docker exec -it $1 "${SCRIPT_PATH}/prod-composer-update.sh"
+# 라라벨 및 연관성 패키지들의 설치 또는 업데이트
+shell_str="cd ${PROJECT_WEB_PATH} && composer install --optimize-autoloader --no-dev"
+sudo docker exec -it $1 bash -c "${shell_str}"
+
+# 라라벨 config, route 설정 캐싱
+shell_str="cd ${PROJECT_WEB_PATH} && php artisan config:cache && php artisan route:cache"
+sudo docker exec -it $1 bash -c "${shell_str}"
