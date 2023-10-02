@@ -24,12 +24,19 @@
 #### 프로젝트 생성하기
 1. 프로젝트를 위한 폴더를 생성하고 터미널을 실행한다.
 2. git 생성 및 서브 모듈을 추가한다.
-
 ```shell
 git init
 
 git submodule add -b main git@github.com:exizt/larabasekit.git larabasekit
 ```
+3. 라라벨 프로젝트를 생성한다.
+```shell
+# web 디렉토리에 라라벨 프로젝트 생성 등의 작업을 진행.
+composer create-project --prefer-dist laravel/laravel 프로젝트명
+mv 프로젝트명 web
+```
+4. `larabasekit/prj_tpl`의 파일들을 프로젝틀 루트로 복사한다.
+
 
 #### 원격 저장소에서 내려받기
 서브모듈을 포함하여 내려받는다.
@@ -204,13 +211,16 @@ mariadb -uroot -p (디비명) < (백업_파일경로)
 ## 이 프로젝트
 ### 스크립트 목록
 - `fetch.sh`
-  - (프로덕션 전용)
-  - 소스 코드의 갱신을 위한 스크립트. `git pull`등을 수행함.
-- `install-laravel.prod.sh`
-  - 라라벨의 셋팅을 위한 스크립트. `composer install`(패키지 설치)등을 수행함.
-- `update.sh`
-  - 마이너 업데이트 적용 스크립트.
-  - `composer install`등을 수행하여, 패키지 업데이트를 진행한다.
+    - (프로덕션 전용)
+    - 소스 코드의 갱신을 위한 스크립트. `git pull`등을 수행함.
+- `install-laravel.sh`
+    - 라라벨의 셋팅을 위한 스크립트. `composer install`(패키지 설치)등을 수행함.
+- `update.prod.sh`
+    - 프로덕션에서 업데이트를 위한 스크립트.
+    - `install-laravel.sh prod`와 동일.
+- `caching-config.prod.sh`
+    - 프로덕션에서 라라벨 설정을 캐싱하는 스크립트.
+
 
 
 ## Docker
