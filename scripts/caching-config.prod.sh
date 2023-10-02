@@ -21,6 +21,12 @@ LARAKIT_PATH=$(realpath "${SCRIPT_PATH}/..") # LaraBaseKit 경로
 PROJECT_ROOT_PATH=$(realpath "${LARAKIT_PATH}/..") # Project Root 경로
 PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 
+# 파라미터가 없는 경우는 실행하지 않도록 함. (잘못된 실행 방지)
+if [ "$#" -lt 1 ]; then
+    echo "Parameters are required."
+	exit 1
+fi
+
 # 프로젝트 루트로 이동
 cd $PROJECT_WEB_PATH
 
