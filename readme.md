@@ -47,6 +47,22 @@ git clone --recurse-submodules -j8 (저장소경로) (폴더명)
     sudo docker-compose --env-file=.env.local --project-directory=. up --build --force-recreate -d
     ```
 
+
+### 셋팅 직후
+작업의 편의를 위해 다음의 심볼릭 링크를 생성한다.
+```shell
+ln -s ./larabasekit/scripts/dev/cmd-web.sh local.sh
+```
+* 로컬에서 명령어를 수행하기 쉽게 해주는 스크립트. 웹 컨테이너로 명령어를 전달한다.
+
+
+사용법 예시
+```shell
+./local.sh "ls -al"
+./local.sh "composer --version"
+```
+
+
 ### 기타
 > 기타 팁 등.
 
