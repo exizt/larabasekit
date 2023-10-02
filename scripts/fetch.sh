@@ -17,6 +17,9 @@ LARAKIT_PATH=$(realpath "${SCRIPT_PATH}/..") # LaraBaseKit 경로
 PROJECT_ROOT_PATH=$(realpath "${LARAKIT_PATH}/..") # Project Root 경로
 PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 
+# 로컬에서는 실행되지 않게 해야하는데... 음...
+
+
 # ### 프로젝트 git 갱신
 # 프로젝트 루트 경로로 이동
 cd $PROJECT_ROOT_PATH
