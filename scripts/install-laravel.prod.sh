@@ -7,7 +7,8 @@
 # 라라벨 폴더 및 파일 퍼미션 지정하고, composer 생성하고, 라라벨 캐시를
 # 생성한다.
 #
-# 스크립트명 : prod-install.sh
+# 스크립트명: install-laravel.prod.sh
+#   - 예전 명칭: prod-install.sh
 # 파라미터:
 #   - 첫번째 파라미터 : 도커 컨테이너 ID. PHP가 실행 중인 도커 컨테이너 ID를 
 #         넘겨받는다. composer 등을 이용하는데에 필요하다.
