@@ -25,8 +25,8 @@ PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 cd $PROJECT_ROOT_PATH
 
 # git 갱신 사항이 있는지 확인하고, 없으면 스크립트 종료.
-git fetch origin master
-git_behind_count=$(git rev-list HEAD..origin/master --count)
+git fetch origin main
+git_behind_count=$(git rev-list HEAD..origin/main --count)
 [[ "${git_behind_count}" == "0" ]] && exit 1
 
 # git 갱신 (프로젝트 git)
