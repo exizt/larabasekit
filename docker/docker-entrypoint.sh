@@ -35,6 +35,8 @@ else
     echo "[entrypoint.sh] composer.json does not exist."
 fi
 
+
+
 # db 서버를 기다리기
 # echo "wait db server"
 # dockerize -wait tcp://db:3306 -timeout 20s
