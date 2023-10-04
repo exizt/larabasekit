@@ -368,3 +368,19 @@ net::ERR_HTTP_RESPONSE_CODE_FAILURE (500 오류)
   - `storage` 폴더의 권한을 점검.
     - 우분투 계열: `chgrp -R www-data storage`
     - CentOS 계열: `chgrp -R apache storage`
+
+
+# 소스 코드 업데이트할 때
+
+composer 패키지 업데이트가 필요한 경우. (개발 환경에서)
+```shell
+sudo rm -rf web/vendor
+rm web/composer.lock
+```
+도커를 재시작한다. (내부적으로 composer install이 실행된다.)
+
+이후 composer.lock 파일이 root 권한이므로 변경해준다.
+```shell
+sudo chown shoon:shoon web/composer.lock
+```
+
