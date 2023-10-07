@@ -46,13 +46,15 @@ git clone --recurse-submodules -j8 (저장소경로) (폴더명)
 
 ### 프로젝트 셋팅하기
 1. 라라벨 설정
-    - `web/.env.local.example`을 복사해서 `web/.env` 생성 후 설정.
+- `web/.env.local.example`을 복사해서 `web/.env` 생성 후 설정.
+
 2. 도커 설정
-    - `larabasekit/docker/.env.local.example`을 복사해서 프로젝트 루트에 `.env.local`로 생성 후 설정.
+- `larabasekit/docker/.env.local.example`을 복사해서 프로젝트 루트에 `.env.local`로 생성 후 설정.
+
 3. 도커 컨테이너 생성 및 실행
-    ```shell
-    sudo docker-compose --env-file=.env.local --project-directory=. up --build --force-recreate -d
-    ```
+```shell
+sudo docker-compose --env-file=.env.local --project-directory=. up --build --force-recreate -d
+```
 
 
 ### 셋팅 직후
@@ -375,7 +377,7 @@ net::ERR_HTTP_RESPONSE_CODE_FAILURE (500 오류)
 composer 패키지 업데이트가 필요한 경우. (개발 환경에서)
 ```shell
 sudo rm -rf web/vendor
-rm web/composer.lock
+rm -y web/composer.lock
 ```
 도커를 재시작한다. (내부적으로 composer install이 실행된다.)
 
