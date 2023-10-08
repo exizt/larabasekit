@@ -1,5 +1,5 @@
 # 'Laravel'을 위한 `PHP, Apache(httpd)` 도커 파일
-FROM php:8.1-apache-bullseye
+FROM php:8.2-apache-bullseye
 
 WORKDIR /app
 
@@ -16,15 +16,19 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 
 # 필요한 것들 설치
 # - git, unzip : composer 에서 필요
-RUN  apt-get update && apt-get install -y \
-    git \
-    unzip \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+# RUN  apt-get update && apt-get install -y \
+#    git \
+#    unzip \
+#    && apt-get autoremove -y \
+#    && rm -rf /var/lib/apt/lists/*
 
 # composer 설치
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+# RUN curl -sS https://getcomposer.org/installer | php
+# RUN mv composer.phar /usr/local/bin/composer
+
+# 단순화된 방식. 멀티 스테이지 빌드 방식.
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
 # composer 설정 및 실행
 ENV COMPOSER_ALLOW_SUPERUSER 1 
 
