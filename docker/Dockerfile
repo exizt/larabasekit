@@ -12,21 +12,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 
-# 필요한 것들 설치
-# - wget : dockerize에서 필요
-# RUN  apt-get update && apt-get install -y \
-#    wget \
-#    && apt-get autoremove -y \
-#    && rm -rf /var/lib/apt/lists/*
-
-# DB 연결에 대기시킬 수 있는 기능을 하는 Dockerize 를 이용
-# ENV DOCKERIZE_VERSION v0.6.1
-# RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-#    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-#    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-
-
-## 2. composer 설치 및 설정
+# ##### 1. composer 설치 및 설정 #####
 
 # 필요한 것들 설치
 # - git, unzip : composer 에서 필요
@@ -40,10 +26,10 @@ RUN  apt-get update && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 # composer 설정 및 실행
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_ALLOW_SUPERUSER 1 
 
 
-# ##### php 및 아파치 확장 기능 설치 등 ######
+# ##### 2. php 및 아파치 확장 기능 설치 등 #####
 # php extension 설치
 RUN docker-php-ext-install bcmath pdo_mysql
 
