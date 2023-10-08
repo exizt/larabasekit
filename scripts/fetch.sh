@@ -55,7 +55,8 @@ chmod a-x ./install-laravel.sh # 실행 권한 제거 (쓸 일이 평소에는 �
 chmod a-x ./dev/*.sh # 실행 권한 제거 (프로덕션에서는 사용되지 않음)
 
 # 프로젝트 루트의 scripts
-chmod o-x "${PROJECT_ROOT_PATH}/scripts/*.sh"
+cd "${PROJECT_ROOT_PATH}"
+chmod o-x ./scripts/*.sh
 
 # 라라벨 설정 캐시 갱신
 # 캐시 갱신은 여기서 처리하지 않음.
