@@ -120,8 +120,15 @@ sudo docker-compose --env-file=.env.local --project-directory=. down -v
 
 # 업데이트
 ## 프로덕션 환경
+(1) git 내려받기 및 소스 갱신
 ```shell
 ./scripts/fetch.sh
+```
+
+
+(2) 프로젝트 설정 변경이나 캐시 변경 등의 적용이 필요할 경우, 다음의 스크립트를 이어서 실행
+```shell
+sudo ./larabasekit/scripts/update.prod.sh php_laravel_web_1
 ```
 
 
