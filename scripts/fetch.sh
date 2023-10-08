@@ -51,7 +51,7 @@ git config core.fileMode false # git에서 퍼미션을 추적하지 않도록 �
 # 적절하게 퍼미션 조정
 cd "${SCRIPT_PATH}"
 chmod o-x ./*.sh # others의 실행 권한 제거
-chmod a-x ./install-laravel.sh # 실행 권한 제거 (쓸 일이 평소에는 없음)
+# chmod a-x ./install-laravel.sh # 실행 권한 제거 (쓸 일이 평소에는 없음)
 chmod a-x ./dev/*.sh # 실행 권한 제거 (프로덕션에서는 사용되지 않음)
 
 # 프로젝트 루트의 scripts
