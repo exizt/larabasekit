@@ -5,6 +5,7 @@ services:
     build:
       context: ./larabasekit/docker
       dockerfile: Dockerfile
+    image: my_laravel_web
     ports:
       - "${APP_PORT_EXTERNAL}:${APP_PORT}"
     volumes:
