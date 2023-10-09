@@ -132,6 +132,11 @@ sudo ./larabasekit/scripts/update.prod.sh php_laravel_web_1
 ```
 
 
+(3) 설정 캐시만 변경하려는 경우
+```shell
+sudo ./larabasekit/scripts/caching-config.prod.sh php_laravel_web_1
+```
+
 # 사용법
 ## 데이터베이스
 ### 데이터베이스 백업
