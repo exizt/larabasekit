@@ -21,7 +21,7 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 #    unzip \
 #    && apt-get autoremove -y \
 #    && rm -rf /var/lib/apt/lists/*
-
+# 
 # composer 설치
 # RUN curl -sS https://getcomposer.org/installer | php
 # RUN mv composer.phar /usr/local/bin/composer
