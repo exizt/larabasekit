@@ -3,8 +3,8 @@
 # /app 경로가 없으면 이상이 있는 것이므로 그냥 종료.
 # 보통 잘못 실행한 경우임.
 if ! [ -d /app ]; then
-	echo "not found /app"
-	exit 1
+    echo "not found /app"
+    exit 1
 fi
 echo "[entrypoint.sh] start"
 
