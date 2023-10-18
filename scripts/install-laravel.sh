@@ -26,7 +26,7 @@ echo "[larabasekit.inst] laravel installation"
 # 파라미터가 없는 경우는 실행하지 않도록 함. (잘못된 실행 방지)
 if [ "$#" -lt 1 ]; then
     echo "Parameters are required."
-	exit 1
+    exit 1
 fi
 
 # Laravel Web 경로로 이동.
