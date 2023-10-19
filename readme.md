@@ -294,6 +294,26 @@ sudo docker exec -it chosim_webapp_1 composer update
 sudo docker exec -it php_laravel_web_1 bash -c "cd $(pwd) && composer update"
 ```
 
+## npm
+(로컬 환경)
+```shell
+# 도커 컨테이너를 이용하는 방법
+sudo docker run -it --rm --interactive --tty -v "$PWD":/app -w /app node:alpine npm --version
+
+# 만들어둔 스크립트를 이용
+./larabasekit/scripts/dev/npm.sh npm --version
+```
+
+`npm run build`
+```shell
+# 도커 컨테이너를 이용하는 방법
+sudo docker run -it --rm --interactive --tty -v "$PWD":/app -w /app node:alpine npm run build
+
+# 만들어둔 스크립트를 이용
+./larabasekit/scripts/npm-build.sh
+```
+
+
 ## Artisan
 (로컬 환경에서)
 ```shell
