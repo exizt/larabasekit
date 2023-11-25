@@ -17,19 +17,38 @@ LARAKIT_PATH=$(realpath "${SCRIPT_PATH}/..") # LaraBaseKit 경로
 PROJECT_ROOT_PATH=$(realpath "${LARAKIT_PATH}/..") # Project Root 경로
 PROJECT_WEB_PATH="${PROJECT_ROOT_PATH}/web" # Laravel 셋팅 경로
 
-# 로컬에서는 실행되지 않게 해야하는데... 음...
+# git 변경사항 있는지 체크하는 함수
+function git_update_check() {
+    # git 현재 브랜치 얻어오기
+    # https://stackoverflow.com/questions/1593051/how-to-programmatically-determine-the-current-checked-out-git-branch
+    # https://stackoverflow.com/questions/6245570/how-do-i-get-the-current-branch-name-in-git
+    # git branch --no-color | grep -E '^\*' | awk '{print $2}' || echo "master"
+    # git symbolic-ref --short -q HEAD
+    current_branch=$(git branch --show-current || echo "master")
 
+    # git 변경사항 체크
+    git fetch origin $current_branch
+    git_behind_count=$(git rev-list HEAD..origin/$current_branch --count)
+    if [[ "${git_behind_count}" == "0" ]]; then
+        echo "false"
+        return
+    else
+        echo "true"
+        return
+    fi
+}
+
+# 로컬에서는 실행되지 않게 해야하는데... 음...
 
 # ### 프로젝트 git 갱신
 # 프로젝트 루트 경로로 이동
 cd $PROJECT_ROOT_PATH
 
 # git 갱신 사항이 있는지 확인하고, 없으면 스크립트 종료.
-git fetch origin main
-git_behind_count=$(git rev-list HEAD..origin/main --count)
-[[ "${git_behind_count}" == "0" ]] && exit 1
+# if ! git_update_check; then exit 1; fi
+[ $(git_update_check) != "true" ] && exit 1
 
-# git 갱신 (프로젝트 git)
+# git 갱신 (서브모듈 포함)
 git pull --recurse-submodules
 
 
